@@ -1,0 +1,10 @@
+{
+  "name": "ancesdir",
+  "version": "0.1.0",
+  "description": "Find a specific ancestor/root directory given a starting location and a search parameter",
+  "main": "index.js",
+  "repository": "git@github.com:somewhatabstract/ancesdir.git",
+  "author": "Jeff Yates <jeff@somewhatabstract.com>",
+  "license": "MIT",
+  "private": false
+}
