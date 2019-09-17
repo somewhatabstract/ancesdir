@@ -32,6 +32,7 @@ jobs:
       run: yarn install
     - name: Lint & Flow
       run: yarn lint && yarn flow:ci
+      if: matrix.coverage
     - name: Run tests
       run: yarn test
       if: matrix.coverage != true
