@@ -13,6 +13,16 @@
   "engines": {
     "node": ">= 8"
   },
+  "keywords": [
+    "find",
+    "ancestor",
+    "utility",
+    "root",
+    "directory",
+    "folder",
+    "project",
+    "repository"
+  ],
   "files": [
     "dist"
   ],

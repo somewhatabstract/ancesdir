@@ -1,4 +1,7 @@
 # ancesdir
+
+[![Node CI](https://github.com/somewhatabstract/ancesdir/workflows/Node%20CI/badge.svg)](https://github.com/somewhatabstract/ancesdir/actions) [![codecov](https://codecov.io/gh/somewhatabstract/ancesdir/branch/master/graph/badge.svg)](https://codecov.io/gh/somewhatabstract/ancesdir)
+
 Find a specific ancestor/root directory given a starting location and a search parameter
 
 There are a few packages out there that already support finding the root directory of a project, based off assumptions like that directory containing `package.json` or `node_modules`. However, this is not always the case. I needed a way to find an ancestor directory that may not always have these markers. So, this provides the means to specific a custom marker file or directory as the means to identify the ancestor that you may need.
