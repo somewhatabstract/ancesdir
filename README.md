@@ -22,6 +22,8 @@ console.log(ancesdir());
 
 Outputs the absolute path of the first parent directory to the `ancesdir` package that contains `package.json`.
 
+In most cases, this is likely all you need.
+
 ### From Specific Location
 
 ```javascript
@@ -41,3 +43,5 @@ console.log(ancesdir(__dirname, ".mymarkerfile");
 ```
 
 Outputs the absolute path of the first parent directory that contains a file or directory called `.mymarkerfile`.
+
+This is useful if you don't have a classic file hierarchy or you want to use this for more advanced use cases where having control over the file system item that identifies your ancestor is useful.
