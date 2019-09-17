@@ -8,7 +8,7 @@
 <PROJECT_ROOT>/bin
 
 [include]
-<PROJECT_ROOT>/src
+src
 .*/__tests__/.*
 
 [options]
