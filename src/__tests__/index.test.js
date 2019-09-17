@@ -119,28 +119,27 @@ describe("ancesdir", () => {
         jest.spyOn(cache, "get").mockReturnValue(null);
         jest.spyOn(cache, "has").mockReturnValue(false);
         jest.spyOn(path, "dirname").mockImplementation(f => {
-            if (f === "/Absolute/Path/Here") {
-                return "/Absolute/Path";
-            } else if (f === "/Absolute/Path") {
-                return "/Absolute";
+            if (f === path.join("Absolute", "Path", "Here")) {
+                return path.join("Absolute", "Path");
+            } else if (f === path.join("Absolute", "Path")) {
+                return "Absolute";
             }
-            const realPath = jest.requireActual("path");
-            return realPath.dirname(f);
+            throw new Error(`Should not get here: ${f}`);
         });
         jest.spyOn(path, "join").mockImplementation((...args) => {
             return jest.requireActual("path").join(...args);
         });
         jest.spyOn(fs, "existsSync").mockImplementation(f => {
-            if (f === "/Absolute/package.json") {
+            if (f === path.join("Absolute", "package.json")) {
                 return true;
             }
             return false;
         });
 
         // Act
-        const result = ancesdir("/Absolute/Path/Here", "package.json");
+        const result = ancesdir("Absolute/Path/Here", "package.json");
 
         // Assert
-        expect(result).toBe("/Absolute");
+        expect(result).toBe("Absolute");
     });
 });
