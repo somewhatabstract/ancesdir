@@ -6,5 +6,9 @@
   "repository": "git@github.com:somewhatabstract/ancesdir.git",
   "author": "Jeff Yates <jeff@somewhatabstract.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2"
+  }
 }
