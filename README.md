@@ -10,7 +10,7 @@ This may be useful in a variety of situations. For example, a monorepo where you
 
 ## Usage
 
-Intended usage - not written yet.
+`yarn add ancesdir` or `npm install ancesdir`
 
 ### Default
 
