@@ -30,8 +30,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: yarn install
-    - name: Lint
-      run: yarn lint
+    - name: Lint & Flow
+      run: yarn lint && yarn flow:ci
     - name: Run tests
       run: yarn test
       if: matrix.coverage != true
