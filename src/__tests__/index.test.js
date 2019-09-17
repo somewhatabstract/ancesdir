@@ -137,7 +137,10 @@ describe("ancesdir", () => {
         });
 
         // Act
-        const result = ancesdir("Absolute/Path/Here", "package.json");
+        const result = ancesdir(
+            path.join("Absolute", "Path", "Here"),
+            "package.json",
+        );
 
         // Assert
         expect(result).toBe("Absolute");
