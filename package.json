@@ -2,13 +2,57 @@
   "name": "ancesdir",
   "version": "0.1.0",
   "description": "Find a specific ancestor/root directory given a starting location and a search parameter",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "git@github.com:somewhatabstract/ancesdir.git",
+  "bugs": {
+    "url": "https://github.com/somewhatabstract/ancesdir/issues"
+  },
   "author": "Jeff Yates <jeff@somewhatabstract.com>",
   "license": "MIT",
   "private": false,
+  "engines": {
+    "node": ">= 8"
+  },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-flow": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.4.0",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "flow-bin": "^0.107.0",
+    "flow-typed": "^2.6.1",
     "jest": "^24.9.0",
-    "jest-extended": "^0.11.2"
-  }
+    "jest-extended": "^0.11.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "rollup": "^1.21.0",
+    "rollup-plugin-analyzer": "^3.1.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel-minify": "^9.0.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-visualizer": "^2.6.0"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn clean && yarn test",
+    "clean": "rm -rf dist",
+    "build": "yarn test && rollup -c",
+    "test": "jest --colors --config jest.config.js",
+    "coverage": "jest --colors --config jest.config.js --coverage",
+    "pretty-quick": "pretty-quick --staged",
+    "lint": "flow && eslint --report-unused-disable-directives --config .eslintrc.json '{src,bin,__{tests,mocks}__}/**/*.js'"
+  },
+  "pre-commit": [
+    "pretty-quick",
+    "lint",
+    "test"
+  ]
 }

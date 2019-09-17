@@ -1,0 +1,48 @@
+name: Node CI
+
+on:
+  pull_request:
+    branches:
+    - master
+
+  push:
+    branches:
+    - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        include:
+          - node-version: 12.x
+            coverage: true
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: yarn install
+    - name: Lint
+      run: yarn lint
+    - name: Run tests
+      run: yarn test && yarn test:integration
+      if: matrix.coverage != true
+      env:
+        CI: true
+    - name: Run tests with coverage
+      run: yarn coverage && yarn test:integration
+      if: matrix.coverage
+      env:
+        CI: true
+    - name: Upload coverage
+      run: yarn codecov
+      if: matrix.coverage
+      env:
+        CI: true
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
