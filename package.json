@@ -1,6 +1,6 @@
 {
   "name": "ancesdir",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Find a specific ancestor/root directory given a starting location and a search parameter",
   "main": "dist/index.js",
   "repository": "https://github.com/somewhatabstract/ancesdir.git",
