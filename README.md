@@ -20,7 +20,7 @@ import ancesdir from "ancesdir";
 console.log(ancesdir());
 ```
 
-Outputs the absolute path of the first parent directory to the `ancesdir` package that contains `package.json`. This is a special case where `ancesdir` will always ignore the starting directory to ensure it doesn't mistakenly return its own folder.
+Outputs the absolute path of the first parent directory to the `ancesdir` package that contains `package.json`.
 
 ### From Specific Location
 
