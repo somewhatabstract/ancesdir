@@ -2,8 +2,8 @@
   "name": "ancesdir",
   "version": "0.1.0",
   "description": "Find a specific ancestor/root directory given a starting location and a search parameter",
-  "main": "src/index.js",
-  "repository": "git@github.com:somewhatabstract/ancesdir.git",
+  "main": "dist/index.js",
+  "repository": "https://github.com/somewhatabstract/ancesdir.git",
   "bugs": {
     "url": "https://github.com/somewhatabstract/ancesdir/issues"
   },
