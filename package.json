@@ -53,7 +53,7 @@
     "rollup-plugin-visualizer": "^2.6.0"
   },
   "scripts": {
-    "prepublishOnly": "yarn clean && yarn test",
+    "prepublishOnly": "yarn clean && yarn build",
     "clean": "rm -rf dist",
     "build": "yarn test && rollup -c",
     "test": "jest --colors --config jest.config.js",
