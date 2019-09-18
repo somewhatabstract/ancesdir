@@ -14,7 +14,7 @@ If you find a bug or want to make enhancements to the project, head on over to t
 
 ### ⓵ Making your first change
 
-Look for bugs or feature requests with the up-for-grabs label and have a go at implementing a change. Once your change is ready, you can submit a pull request.
+Look for bugs or feature requests with the [good first issue](https://github.com/somewhatabstract/ancesdir/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or [help wanted](https://github.com/somewhatabstract/ancesdir/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22+) labels and have a go at implementing a change. Once your change is ready, you can submit a pull request.
 
 ### 🎬 Getting Started
 
