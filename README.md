@@ -1,6 +1,6 @@
 # ancesdir
 
-[![Node CI](https://github.com/somewhatabstract/ancesdir/workflows/Node%20CI/badge.svg)](https://github.com/somewhatabstract/ancesdir/actions) [![codecov](https://codecov.io/gh/somewhatabstract/ancesdir/branch/master/graph/badge.svg)](https://codecov.io/gh/somewhatabstract/ancesdir)
+[![Node CI](https://github.com/somewhatabstract/ancesdir/workflows/Node%20CI/badge.svg)](https://github.com/somewhatabstract/ancesdir/actions) [![codecov](https://codecov.io/gh/somewhatabstract/ancesdir/branch/master/graph/badge.svg)](https://codecov.io/gh/somewhatabstract/ancesdir) ![npm (tag)](https://img.shields.io/npm/v/ancesdir/latest)
 
 Find a specific ancestor/root directory given a starting location and a search parameter
 
