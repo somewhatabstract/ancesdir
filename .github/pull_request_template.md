@@ -1,12 +1,3 @@
----
-name: Pull Request
-about: Submit a change
-title: ''
-labels:
-assignees: somewhatabstract
-
----
-
 **Summary**
 A clear and concise description of what the changes are.
 
