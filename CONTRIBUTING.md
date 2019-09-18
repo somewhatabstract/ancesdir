@@ -4,11 +4,11 @@
 
 Whether raising an issue, reviewing a pull request, or implementing a change, the participation of others is a wonderful 🎁. Read on to find out how you can get involved.
 
+📖 Be sure to read our [Code of Conduct](https://github.com/somewhatabstract/ancesdir/blob/master/CODE_OF_CONDUCT.md).
+
 ## 🛑 Bugs And Feature Requests
 
-If you find a bug or want to make enhancements to the project, head on over to the Issues section and raise an issue. The issue templates will guide you in providing details that will help others help you.
-
-[🔗Issues](https://github.com/somewhatabstract/ancesdir/issues)
+If you find a bug or want to make enhancements to the project, head on over to the [🔗Issues](https://github.com/somewhatabstract/ancesdir/issues) section and raise an issue. The issue templates will guide you in providing details that will help others help you.
 
 ## 💻 Code Changes
 
