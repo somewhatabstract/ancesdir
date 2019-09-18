@@ -8,9 +8,17 @@ There are a few packages out there that already support finding the root directo
 
 This may be useful in a variety of situations. For example, a monorepo where you want to differentiate in development scripts between the root folder of each package, and the root folder of the entire repository.
 
-## Usage
+## Getting Started
 
-`yarn add ancesdir` or `npm install ancesdir`
+### yarn
+
+**`yarn add ancesdir`**
+
+### npm
+
+ **`npm install ancesdir`**
+
+## Usage
 
 ### Default
 
