@@ -25,7 +25,7 @@ To work in the `ancesdir` repository, follow these steps:
 2. Install `yarn` (see [🔗yarnpkg.com](https://yarnpkg.com))
 3. Run `yarn install` to install the dependencies
 
-You can now work on `ancesdir`. We prefer [🔗Visual Studio Code](https://code.visualstudio.com/) as our development environment (it's cross-platform and awesome), but please use what works you feel comfortable with (we'll even forgive you for using vim).
+You can now work on `ancesdir`. We prefer [🔗Visual Studio Code](https://code.visualstudio.com/) as our development environment (it's cross-platform and awesome), but please use what you feel comfortable with (we'll even forgive you for using vim).
 
 ### 🧪 Code Quality
 
