@@ -11,6 +11,8 @@ on:
 
 jobs:
   install:
+    env:
+      CI: true
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -27,6 +29,8 @@ jobs:
 
 
   lint:
+    env:
+      CI: true
     needs: install
     runs-on: ${{ matrix.os }}
     strategy:
@@ -41,6 +45,8 @@ jobs:
 
 
   build:
+    env:
+      CI: true
     needs: install
     runs-on: ${{ matrix.os }}
     strategy:
@@ -50,22 +56,19 @@ jobs:
     steps:
       - name: Build dist
         run: yarn build
-        env:
-          CI: true
 
 
   coverage:
+    env:
+      CI: true
     needs: install
     runs-on: ubuntu-latest
     node-version: 12.x
     steps:
     - name: Run tests with coverage
       run: yarn coverage
-      env:
-        CI: true
     - name: Upload coverage
       run: yarn codecov
       env:
-        CI: true
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
