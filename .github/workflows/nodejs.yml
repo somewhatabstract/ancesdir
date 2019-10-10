@@ -63,7 +63,6 @@ jobs:
       CI: true
     needs: install
     runs-on: ubuntu-latest
-    node-version: 12.x
     steps:
     - name: Run tests with coverage
       run: yarn coverage
