@@ -17,8 +17,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macOS-latest]
-        node-version: [8.x, 10.x, 12.x]
+        os: [ubuntu-latest]
+        node-version: [12.x]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -29,16 +29,13 @@ jobs:
       run: yarn install
     - name: Lint
       run: yarn lint
-      if: matrix.os != 'windows-latest'
-    - name: Lint
-      run: "yarn lint --rule 'linebreak-style: 0'"
-      if: matrix.os == 'windows-latest'
     - name: Flow
       run: yarn flow:ci
 
 
-  build_and_test:
-    name: Build and test
+  test_and_build:
+    needs: [coverage, lint]
+    name: Test and build
     env:
       CI: true
     runs-on: ${{ matrix.os }}
@@ -54,7 +51,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: yarn install
-    - name: Build dist
+    - name: Run tests and build
       run: yarn build
 
 
