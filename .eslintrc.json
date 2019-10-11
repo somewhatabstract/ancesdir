@@ -34,10 +34,6 @@
                 "varsIgnorePattern": "^_*$"
             }
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
         "semi": [
             "error",
             "always"

@@ -10,18 +10,15 @@ on:
     - master
 
 jobs:
-  test:
+  lint:
+    name: Lint and flow check
+    env:
+      CI: true
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macOS-latest]
-        node-version: [8.x, 10.x, 12.x]
-        include:
-          - os: ubuntu-latest
-            node-version: 12.x
-            coverage: true
-
+        os: [ubuntu-latest]
+        node-version: [12.x]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -30,22 +27,50 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: yarn install
-    - name: Lint & Flow
-      run: yarn lint && yarn flow:ci
-      if: matrix.coverage
-    - name: Run tests
-      run: yarn test
-      if: matrix.coverage != true
-      env:
-        CI: true
+    - name: Lint
+      run: yarn lint
+    - name: Flow
+      run: yarn flow:ci
+
+
+  coverage:
+    name: Update test coverage
+    env:
+      CI: true
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Install dependencies
+      run: yarn install
     - name: Run tests with coverage
       run: yarn coverage
-      if: matrix.coverage
-      env:
-        CI: true
     - name: Upload coverage
       run: yarn codecov
-      if: matrix.coverage
       env:
-        CI: true
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+
+  test_and_build:
+    needs: [coverage, lint]
+    name: Test and build
+    env:
+      CI: true
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: yarn install
+    - name: Run tests and build
+      run: yarn build

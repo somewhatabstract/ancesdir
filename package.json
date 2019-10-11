@@ -61,7 +61,7 @@
     "pretty-quick": "pretty-quick --staged",
     "flow:ci": "flow check",
     "flow:dev": "flow",
-    "lint": "eslint --report-unused-disable-directives --config .eslintrc.json '{src,bin,__{tests,mocks}__}/**/*.js'"
+    "lint": "eslint --report-unused-disable-directives --config .eslintrc.json \"{src,bin,__{tests,mocks}__}/**/*.js\""
   },
   "pre-commit": [
     "pretty-quick",
