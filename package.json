@@ -50,7 +50,7 @@
     "rollup-plugin-babel-minify": "^9.0.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-visualizer": "^2.6.0"
+    "rollup-plugin-visualizer": "^3.0.6"
   },
   "scripts": {
     "prepublishOnly": "yarn clean && yarn build",
