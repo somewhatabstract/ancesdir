@@ -66,7 +66,7 @@ Publishing an updated package is reserved for those with appropriate credentials
 3. Locally:
     1. `git checkout master && git pull`
     2. Edit the `package.json` to update the package version
-    3. `git tag vX.Y` where X is the major version from the `package.json` and Y is the minor version
+    3. `git tag vX.Y.Z` where X is the major version from the `package.json`, Y is the minor version, and Z is the patch version
     4. `git push --tags`
     5. `yarn install`
     6. `yarn build` (if tests fail, stop!)
