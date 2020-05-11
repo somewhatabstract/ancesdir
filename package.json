@@ -35,7 +35,7 @@
     "babel-eslint": "^10.0.3",
     "babel-jest": "^26.0.0",
     "codecov": "^3.5.0",
-    "eslint": "^6.4.0",
+    "eslint": "^7.0.0",
     "eslint-plugin-flowtype": "^4.3.0",
     "flow-bin": "^0.124.0",
     "flow-typed": "^3.1.0",
