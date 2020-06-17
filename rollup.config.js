@@ -1,7 +1,7 @@
-import resolve from "rollup-plugin-node-resolve";
-import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
-import minify from "rollup-plugin-babel-minify";
+import resolve from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
+import {terser} from "rollup-plugin-terser";
 import analyzer from "rollup-plugin-analyzer";
 import visualizer from "rollup-plugin-visualizer";
 
@@ -15,11 +15,10 @@ const getOptionalPlugins = () => {
         // NOTE: The analysis is of the pre-minified output.
         // So the reported bundle size is the non-minified size that includes
         // comments and full code.
-        analyzer({summaryOnly: true, filter: module => module.size !== 0}),
+        analyzer({summaryOnly: true, filter: (module) => module.size !== 0}),
         visualizer({
             title: "ancesdir bundle rollup (minified)",
             filename: "obj/stats.html",
-            open: true,
         }),
     ];
 };
@@ -35,9 +34,10 @@ export default {
         resolve({preferBuiltins: true}),
         babel({
             exclude: "node_modules/**", // only transpile our source code
+            babelHelpers: "bundled",
         }),
-        commonjs({namedExports: {"promise.prototype.finally": ["shim"]}}),
-        minify({comments: false}),
+        commonjs(),
+        terser(),
         ...getOptionalPlugins(),
     ],
 };
