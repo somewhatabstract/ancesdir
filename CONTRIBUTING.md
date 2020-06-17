@@ -4,7 +4,7 @@
 
 Whether raising an issue, reviewing a pull request, or implementing a change, the participation of others is a wonderful 🎁. Read on to find out how you can get involved.
 
-📖 Be sure to read our [Code of Conduct](https://github.com/somewhatabstract/ancesdir/blob/master/CODE_OF_CONDUCT.md).
+📖 Be sure to read our [Code of Conduct](https://github.com/somewhatabstract/ancesdir/blob/main/CODE_OF_CONDUCT.md).
 
 ## 🛑 Bugs And Feature Requests
 
@@ -61,10 +61,10 @@ Running the build will execute tests first.
 
 Publishing an updated package is reserved for those with appropriate credentials. Coordinate with the repository owners to get your changes into a published release. The steps for publishing are:
 
-1. Ensure all PRs are reviewed and merged to `master`
+1. Ensure all PRs are reviewed and merged to `main`
 1. Wait for all testing to pass (if it does not, we have a problem)
 1. Locally:
-    1. `git checkout master && git pull`
+    1. `git checkout main && git pull`
     1. Edit the `package.json` to update the package version
     1. Commit the changes to `package.json` and push them
     1. `git tag vX.Y.Z` where X is the major version from the `package.json`, Y is the minor version, and Z is the patch version
