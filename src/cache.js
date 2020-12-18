@@ -1,2 +1,2 @@
 // @flow
-export default new Map<string, ?string>();
+export default (new Map(): Map<string, ?string>);
