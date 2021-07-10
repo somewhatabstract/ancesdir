@@ -41,7 +41,6 @@
         "eslint": "^7.0.0",
         "eslint-plugin-flowtype": "^5.1.0",
         "flow-bin": "^0.155.0",
-        "flow-typed": "^3.1.0",
         "jest": "^27.0.1",
         "jest-extended": "^0.11.2",
         "pre-commit": "^1.2.2",
