@@ -39,7 +39,7 @@
         "babel-eslint": "^10.0.3",
         "babel-jest": "^27.0.1",
         "eslint": "^7.0.0",
-        "eslint-plugin-flowtype": "^6.0.1",
+        "eslint-plugin-flowtype": "^7.0.0",
         "flow-bin": "^0.163.0",
         "jest": "^27.0.1",
         "jest-extended": "^1.0.0",
