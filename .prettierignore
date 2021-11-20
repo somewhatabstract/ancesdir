@@ -8,3 +8,4 @@ yarn.lock
 *.yml
 *.md
 *.py
+.babelrc

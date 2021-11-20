@@ -15,9 +15,10 @@
         "SharedArrayBuffer": "readonly"
     },
     "plugins": [
-        "flowtype"
+        "flowtype",
+        "@babel"
     ],
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
         "sourceType": "module"
     },
