@@ -12,7 +12,7 @@
     "license": "MIT",
     "private": false,
     "engines": {
-        "node": ">= 12"
+        "node": ">= 16"
     },
     "keywords": [
         "find",
