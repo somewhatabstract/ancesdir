@@ -1,5 +1,4 @@
-// @flow
-import cache from "../cache.js";
+import cache from "../cache";
 
 describe("cache", () => {
     it("should return a map", () => {

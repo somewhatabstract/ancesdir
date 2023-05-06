@@ -2,6 +2,9 @@
 // https://jestjs.io/docs/en/configuration.html
 
 module.exports = {
+    // The files that contain tests.
+    testMatch: ["**/src/**/__tests__/**/*.test.ts"],
+
     // Automatically restore mocks between every test
     restoreMocks: true,
 

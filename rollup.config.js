@@ -5,7 +5,7 @@ import {terser} from "rollup-plugin-terser";
 import filesize from "rollup-plugin-filesize";
 
 export default {
-    input: "./src/index.js",
+    input: "./src/index.ts",
     output: [
         {
             file: "./dist/index.js",
@@ -21,11 +21,13 @@ export default {
         },
     ],
     plugins: [
-        resolve({preferBuiltins: true}),
         babel({
+            configFile: "./babel.config.js",
             exclude: "node_modules/**", // only transpile our source code
             babelHelpers: "bundled",
+            extensions: [".ts"],
         }),
+        resolve({preferBuiltins: true, extensions: [".ts"]}),
         commonjs(),
         terser(),
         filesize(),
