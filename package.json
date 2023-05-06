@@ -1,6 +1,6 @@
 {
     "name": "ancesdir",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "description": "Find a specific ancestor/root directory given a starting location and a search parameter",
     "types": "dist/index.d.ts",
     "main": "dist/index.js",
