@@ -31,8 +31,12 @@ jobs:
       run: yarn lint
     - name: Types
       run: yarn typecheck
-    - uses: Khan/actions@check-for-changeset-v0
-      if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+    - name: Changesets check
+      uses: Khan/actions@check-for-changeset-v0
+      if: |
+        github.actor != 'dependabot[bot]' &&
+        github.actor != 'dependabot-preview[bot]' &&
+        github.event_name == 'pull_request'
       with:
         exclude: .github/,.storybook/
 
