@@ -23,7 +23,7 @@ To work in the `ancesdir` repository, follow these steps:
 1. Clone the repository
    `git clone git@github.com:somewhatabstract/ancesdir.git`
 2. Install `yarn` (see [🔗yarnpkg.com](https://yarnpkg.com))
-3. Run `yarn install` to install the dependencies
+3. Run `yarn` to install the dependencies
 
 You can now work on `ancesdir`. We prefer [🔗Visual Studio Code](https://code.visualstudio.com/) as our development environment (it's cross-platform and awesome), but please use what you feel comfortable with (we'll even forgive you for using vim).
 
@@ -41,35 +41,22 @@ We love code reviews. If there are open pull requests, please feel free to revie
 
 #### Automated
 
-To ensure code quality, we use prettier, flow, eslint, and jest. These are all executed on commit, so don't worry if you forget to run them before you commit. They are also executed when you submit a pull request to ensure the contribution meets our code quality standard.
+To ensure code quality, we use prettier, static typing, eslint, and jest. These are all executed when you submit a pull request to ensure the contribution meets our code quality standard.
 
 To execute these operations outside of a pull request or commit operation, you can use `yarn`.
 
-- `yarn flow`
-- `yarn lint`
+- `yarn typecheck`
+- `yarn lint` or `yarn lint --fix` to autofix what can be
 - `yarn test`
 
 💭**REMEMBER** If you would like to contribute code changes to the project, first make sure there's a corresponding issue for the change you wish to make.
 
 ## 📦 Build And Publish
 
-Anyone can create a local build of the distributed code by running `yarn build`. After the build is executed, a stats page will open in your browser of choice showing the distributed package breakdown. This can be helpful in identifying code bloat issues, as can the rollup output in the command line.
+Anyone can create a local build of the distributed code by running `yarn build`.
 
 Running the build will execute tests first.
 
 ### Publishing
 
-Publishing an updated package is reserved for those with appropriate credentials. Coordinate with the repository owners to get your changes into a published release. The steps for publishing are:
-
-1. Ensure all PRs are reviewed and merged to `main`
-1. Wait for all testing to pass (if it does not, we have a problem)
-1. Locally:
-    1. `git checkout main && git pull`
-    1. Edit the `package.json` to update the package version
-    1. Commit the changes to `package.json` and push them
-    1. `git tag vX.Y.Z` where X is the major version from the `package.json`, Y is the minor version, and Z is the patch version
-    1. `git push --tags`
-    1. `yarn install`
-    1. `yarn build` (if tests fail, stop!)
-    1. `npm publish`
-1. Create a release on github with some notes on what the release contains and a link to the NPM package
+We use an automated release process. When a pull-request is accepted to `main`, a new release pull-request is created. This pull-request will contain the changes from the pull-request merged to `main` and will bump the version number of the package. Once the release pull-request is merged, the package will be published to NPM.
