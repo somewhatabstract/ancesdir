@@ -1,13 +1,12 @@
-// @flow
 import path from "path";
 import fs from "fs";
 
-import cache from "./cache.js";
+import cache from "./cache";
 
 const Errors = {
     MARKER_NOT_FOUND: "No such marker found from given starting location",
     NOT_ABSOLUTE_PATH: "From path must be absolute",
-};
+} as const;
 
 function ancesdirImpl(from: string, marker: string): string {
     if (!path.isAbsolute(from)) {

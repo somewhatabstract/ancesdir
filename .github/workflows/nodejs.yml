@@ -11,7 +11,7 @@ on:
 
 jobs:
   lint:
-    name: Lint and flow check
+    name: Lint and type check
     env:
       CI: true
     runs-on: ${{ matrix.os }}
@@ -29,8 +29,8 @@ jobs:
       run: yarn install
     - name: Lint
       run: yarn lint
-    - name: Flow
-      run: yarn flow:ci
+    - name: Types
+      run: yarn typecheck
 
 
   coverage:

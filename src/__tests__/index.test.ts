@@ -1,9 +1,8 @@
-// @flow
 import fs from "fs";
 import path from "path";
 
-import cache from "../cache.js";
-import ancesdir from "../index.js";
+import cache from "../cache";
+import ancesdir from "../index";
 
 jest.mock("path");
 
@@ -37,7 +36,7 @@ describe("ancesdir", () => {
         // Arrange
         jest.spyOn(path, "isAbsolute").mockReturnValue(true);
         jest.spyOn(cache, "get").mockReturnValue(null);
-        jest.spyOn(path, "dirname").mockImplementationOnce(f => f);
+        jest.spyOn(path, "dirname").mockImplementationOnce((f: any) => f);
 
         // Act
         const underTest = () => ancesdir("/Absolute/Path", "markerwewontfind");
@@ -67,7 +66,9 @@ describe("ancesdir", () => {
         // Arrange
         jest.spyOn(path, "isAbsolute").mockReturnValue(true);
         jest.spyOn(cache, "get").mockReturnValue(null);
-        jest.spyOn(path, "dirname").mockImplementationOnce(f => "PARENTDIR");
+        jest.spyOn(path, "dirname").mockImplementationOnce(
+            (f: any) => "PARENTDIR",
+        );
         jest.spyOn(fs, "existsSync").mockReturnValue(true);
         const joinSpy = jest.spyOn(path, "join").mockReturnValue("MARKERPATH");
 
@@ -85,7 +86,7 @@ describe("ancesdir", () => {
             realPath.normalize(realPath.join(__dirname, "../index.js")),
         );
         const pretendPackageFolder = "PRETEND_PACKAGE_FOLDER";
-        jest.spyOn(path, "isAbsolute").mockImplementation(f => {
+        jest.spyOn(path, "isAbsolute").mockImplementation((f: any) => {
             if (f === pathToIndexJS || f === pretendPackageFolder) {
                 // If it's the dirname we expect to be asked for.
                 // Or it's the result of the initial call to default to our
@@ -100,7 +101,8 @@ describe("ancesdir", () => {
         jest.spyOn(cache, "get").mockImplementation((key: string) => {
             if (key.startsWith(pathToIndexJS)) {
                 return pretendPackageFolder;
-            } else if (key.startsWith(pretendPackageFolder)) {
+            }
+            if (key.startsWith(pretendPackageFolder)) {
                 return "FINAL_RESULT";
             }
             throw new Error("Should not get a request that hits this");
@@ -118,18 +120,19 @@ describe("ancesdir", () => {
         jest.spyOn(path, "isAbsolute").mockReturnValue(true);
         jest.spyOn(cache, "get").mockReturnValue(null);
         jest.spyOn(cache, "has").mockReturnValue(false);
-        jest.spyOn(path, "dirname").mockImplementation(f => {
+        jest.spyOn(path, "dirname").mockImplementation((f: any) => {
             if (f === path.join("Absolute", "Path", "Here")) {
                 return path.join("Absolute", "Path");
-            } else if (f === path.join("Absolute", "Path")) {
+            }
+            if (f === path.join("Absolute", "Path")) {
                 return "Absolute";
             }
             throw new Error(`Should not get here: ${f}`);
         });
-        jest.spyOn(path, "join").mockImplementation((...args) => {
+        jest.spyOn(path, "join").mockImplementation((...args: any) => {
             return jest.requireActual("path").join(...args);
         });
-        jest.spyOn(fs, "existsSync").mockImplementation(f => {
+        jest.spyOn(fs, "existsSync").mockImplementation((f: any) => {
             if (f === path.join("Absolute", "package.json")) {
                 return true;
             }
