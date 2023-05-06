@@ -2,6 +2,7 @@
     "name": "ancesdir",
     "version": "4.0.0",
     "description": "Find a specific ancestor/root directory given a starting location and a search parameter",
+    "types": "dist/index.d.ts",
     "main": "dist/index.js",
     "module": "dist/es/index.js",
     "repository": "https://github.com/somewhatabstract/ancesdir.git",
@@ -74,12 +75,14 @@
     "scripts": {
         "prepublishOnly": "yarn clean && yarn build",
         "clean": "rm -rf dist",
-        "build": "yarn test && rollup -c",
+        "build": "yarn test && rollup -c && yarn build:types",
+        "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig-types.json",
         "test": "jest --colors --config jest.config.js",
         "coverage": "jest --colors --config jest.config.js --coverage",
         "pretty-quick": "pretty-quick --staged",
         "typecheck": "tsc --noEmit --project tsconfig.json",
-        "lint": "eslint --report-unused-disable-directives --config .eslintrc.js \"{src,bin,__{tests,mocks}__}/**/*.ts\""
+        "lint": "eslint --report-unused-disable-directives --config .eslintrc.js \"{src,bin,__{tests,mocks}__}/**/*.ts\"",
+        "publish:ci": "git diff --stat --exit-code HEAD && yarn build && changeset publish"
     },
     "pre-commit": [
         "pretty-quick",

@@ -4,6 +4,7 @@ import path from "path";
 import cache from "../cache";
 import ancesdir from "../index";
 
+jest.mock("fs");
 jest.mock("path");
 
 describe("ancesdir", () => {
