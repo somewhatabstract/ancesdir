@@ -1,5 +1,11 @@
 # ancesdir
 
+## 5.0.1
+
+### Patch Changes
+
+-   9254ed5: Update dependencies
+
 ## 5.0.0
 
 ### Major Changes
