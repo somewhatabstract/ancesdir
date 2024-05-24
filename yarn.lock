@@ -75,9 +75,9 @@
     semver "^6.3.1"
 
 "@babel/eslint-plugin@^7.22.10":
-  version "7.23.5"
-  resolved "https://registry.yarnpkg.com/@babel/eslint-plugin/-/eslint-plugin-7.23.5.tgz#77d4703e9f83b81e9fc13382810372beb2f10f94"
-  integrity sha512-03+E/58Hoo/ui69gR+beFdGpplpoVK0BSIdke2iw4/Bz7eGN0ssRenNlnU4nmbkowNQOPCStKSwFr8H6DiY49g==
+  version "7.24.6"
+  resolved "https://registry.yarnpkg.com/@babel/eslint-plugin/-/eslint-plugin-7.24.6.tgz#6e9e59653b7fec1047cae3ab82223c50aa810df8"
+  integrity sha512-sUDNpeOID2Am4cBXEmyhRaSvwwXIHVaG7trk7HO1Ri5VrEIBPYXg4ulTvZm2Lo0Y7u7Tw8QLe6JygchdOOto6w==
   dependencies:
     eslint-rule-composer "^0.3.0"
 
