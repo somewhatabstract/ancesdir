@@ -7,12 +7,15 @@
         "rootDir": "src",
         "outDir": "dist",
         /* Language and Environment */
-        "target": "ES2016",
+        "target": "es2022",
+        "lib": [
+            "es2023"
+        ],
         /* Modules */
         // Required for dynamic imports even though we aren't using
         // tsc to output any modules.
-        "module": "ESNext",
-        "moduleResolution": "node",
+        "module": "node16",
+        "moduleResolution": "node16",
         /* Interop Constraints */
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
