@@ -1,5 +1,17 @@
 # ancesdir
 
+## 6.0.0
+
+### Major Changes
+
+-   fcc3a96: BREAKING CHANGE:
+
+    -   Drop support for Node 16 and Node 18. Node 20 is now the minimum required version.
+
+    HOUSEKEEPING:
+
+    -   Updated various development dependencies like eslint, prettier, typescript, babel, etc.
+
 ## 5.0.1
 
 ### Patch Changes
