@@ -1565,12 +1565,13 @@
   integrity sha512-9kNKzlXqJXPr22YnfqsHcgbX14jqkc8DhN6BwaLI7CwLVfPNploOCv2Ja46IP9PN+PZP5rSQxfkv1FaNg1dj3g==
 
 "@khanacademy/eslint-plugin@^3.0.0":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@khanacademy/eslint-plugin/-/eslint-plugin-3.1.1.tgz#86cf706c28fbaa11083dc175202056665ab44124"
-  integrity sha512-1tOJRN1MWc7tOiSwxBT9KfOmo46d0/eB3P3On4PCZKkrrdC+wDNTxQ3FWX+xZBCjl6bSdh/ab5HZkOatDD7efA==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@khanacademy/eslint-plugin/-/eslint-plugin-3.1.2.tgz#ac4692b9eee272957a1e4b21f5248a0069872d50"
+  integrity sha512-+9ohgHE6R0ox98rcfh28D4Hmue4acL3fUh8wZ7JwVBXE9JWBRWaehWRwYyKi71rUI9g2ierY4Gu5qbPx2LhOpQ==
   dependencies:
     "@babel/types" "^7.23.0"
     "@typescript-eslint/utils" "8.17.0"
+    ancesdir "^5.0.1"
     checksync "^5.0.5"
 
 "@manypkg/find-root@^1.1.0":
@@ -2176,6 +2177,11 @@ ajv@^6.12.4:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
+
+ancesdir@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ancesdir/-/ancesdir-5.0.1.tgz#8391b486b3518b890652b8889482c186b348be8d"
+  integrity sha512-s61cXyQspPAwsFvf2UJYAZpLOqTKS12fjUxOebi4ymUCLuSn0f0trGBe+a3bFEH0Yw4zgQDxXkYFsvc6YbQpkw==
 
 ansi-align@^3.0.0:
   version "3.0.1"
