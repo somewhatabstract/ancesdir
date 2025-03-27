@@ -1629,10 +1629,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@khanacademy/eslint-config@^4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@khanacademy/eslint-config/-/eslint-config-4.0.1.tgz#cc0361250d97a5a6f9df7f3b470c9a4f422c3942"
-  integrity sha512-9kNKzlXqJXPr22YnfqsHcgbX14jqkc8DhN6BwaLI7CwLVfPNploOCv2Ja46IP9PN+PZP5rSQxfkv1FaNg1dj3g==
+"@khanacademy/eslint-config@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@khanacademy/eslint-config/-/eslint-config-5.2.1.tgz#1e02fd0c3f62685fc0923338b646fd67485caee9"
+  integrity sha512-2OuMYsE4LTFVOCLR0Os89UG3X5atbE9roA/1qzUJWxxLUMOMGSFiFA1b6oRPmjJxFOiC6vR7g0Q5HGNFy5e7lg==
 
 "@khanacademy/eslint-plugin@^3.0.0":
   version "3.1.2"
