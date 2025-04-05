@@ -3,14 +3,21 @@ import * as fs from "fs";
 
 import cache from "./cache";
 
-const Errors = {
-    MARKER_NOT_FOUND: "No such marker found from given starting location",
-    NOT_ABSOLUTE_PATH: "From path must be absolute",
-} as const;
+const throwStartingPathNotAbsoluteMessage = (from: string): never => {
+    throw new Error(
+        `The starting path must be absolute, but "${from}" is relative`,
+    );
+};
+
+const throwMarkerNotFoundMessage = (from: string, marker: string): never => {
+    throw new Error(
+        `Could not find marker, "${marker}", from given starting location "${from}"`,
+    );
+};
 
 function ancesdirImpl(from: string, marker: string): string {
     if (!path.isAbsolute(from)) {
-        throw new Error(Errors.NOT_ABSOLUTE_PATH);
+        throwStartingPathNotAbsoluteMessage(from);
     }
 
     const keys = [];
@@ -39,7 +46,7 @@ function ancesdirImpl(from: string, marker: string): string {
         } else if (cache.has(key)) {
             // A null in the cache means we tried this lookup and never found
             // the marker.
-            throw new Error(Errors.MARKER_NOT_FOUND);
+            throwMarkerNotFoundMessage(from, marker);
         }
 
         /**
@@ -54,7 +61,7 @@ function ancesdirImpl(from: string, marker: string): string {
             for (const key of keys) {
                 cache.set(key, null);
             }
-            throw new Error(Errors.MARKER_NOT_FOUND);
+            throwMarkerNotFoundMessage(from, marker);
         }
 
         /**
