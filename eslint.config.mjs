@@ -19,12 +19,7 @@ const compat = new FlatCompat({
 
 export default [
     {
-        ignores: [
-            "**/node_modules",
-            "flow-typed/**/*.js",
-            "**/coverage",
-            "**/dist",
-        ],
+        ignores: ["**/node_modules", "**/coverage", "**/dist"],
     },
     ...compat.extends("@khanacademy"),
     {
