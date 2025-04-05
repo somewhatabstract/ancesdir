@@ -46,7 +46,7 @@ To ensure code quality, we use prettier, static typing, eslint, and jest. These 
 To execute these operations outside of a pull request or commit operation, you can use `pnpm`.
 
 - `pnpm typecheck`
-- `pnpm lint` or `pnpm lint --fix` to autofix what can be
+- `pnpm eslint` or `pnpm eslint --fix` to autofix what can be
 - `pnpm test`
 
 💭**REMEMBER** If you would like to contribute code changes to the project, first make sure there's a corresponding issue for the change you wish to make.
