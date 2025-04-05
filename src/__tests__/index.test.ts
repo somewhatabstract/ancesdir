@@ -17,7 +17,7 @@ describe("ancesdir", () => {
 
         // Assert
         expect(underTest).toThrowErrorMatchingInlineSnapshot(
-            `"From path must be absolute"`,
+            `"The starting path must be absolute, but "./path" is relative"`,
         );
     });
 
@@ -44,7 +44,7 @@ describe("ancesdir", () => {
 
         // Assert
         expect(underTest).toThrowErrorMatchingInlineSnapshot(
-            `"No such marker found from given starting location"`,
+            `"Could not find marker, "markerwewontfind", from given starting location "/Absolute/Path""`,
         );
     });
 
@@ -59,7 +59,7 @@ describe("ancesdir", () => {
 
         // Assert
         expect(underTest).toThrowErrorMatchingInlineSnapshot(
-            `"No such marker found from given starting location"`,
+            `"Could not find marker, "markerwewontfind", from given starting location "/Absolute/Path""`,
         );
     });
 
