@@ -38,6 +38,15 @@ function ancesdirImpl(from: string, marker: string): string {
 
         /**
          * If we have already looked this up, we can just grab it from our map!
+         *
+         * NOTE: If the marker was created after we cached the result, we will
+         * still claim it cannot be found. Equally, if the marker was deleted
+         * after we cached the result, we will still claim it was found.
+         * The assumption is that a use of ancesdir is short-lived and such
+         * scenarios aren't likely to occur. We could mitigate this by adding
+         * the ability to clear the cache, or by making the cache invalidate
+         * after a certain time period. Something to consider for a future
+         * update, though no one has asked for it yet.
          */
         const cachedResult = cache.get(key);
         if (cachedResult != null) {
