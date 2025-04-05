@@ -21,9 +21,9 @@ export default [
     {
         ignores: [
             "**/node_modules",
-            "flow-typed/**/*.js",
             "**/coverage",
             "**/dist",
+            ".prettierrc.js",
         ],
     },
     ...compat.extends("@khanacademy"),
@@ -41,7 +41,9 @@ export default [
                 ...globals.node,
             },
         },
-
+    },
+    {
+        files: ["**/src/**", "**/__tests__/**/*.ts", "**/__mocks__/**/*.ts"],
         rules: {
             "constructor-super": "error",
             curly: "error",
