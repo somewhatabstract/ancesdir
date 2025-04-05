@@ -10,6 +10,9 @@ This may be useful in a variety of situations. For example, a monorepo where you
 
 ## Getting Started
 
+### pnpm
+**`pnpm add ancesdir`**
+
 ### yarn
 
 **`yarn add ancesdir`**
