@@ -19,7 +19,12 @@ const compat = new FlatCompat({
 
 export default [
     {
-        ignores: ["**/node_modules", "**/coverage", "**/dist"],
+        ignores: [
+            "**/node_modules",
+            "**/coverage",
+            "**/dist",
+            ".prettierrc.js",
+        ],
     },
     ...compat.extends("@khanacademy"),
     {
