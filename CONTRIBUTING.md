@@ -22,8 +22,8 @@ To work in the `ancesdir` repository, follow these steps:
 
 1. Clone the repository
    `git clone git@github.com:somewhatabstract/ancesdir.git`
-2. Install `yarn` (see [🔗yarnpkg.com](https://yarnpkg.com))
-3. Run `yarn` to install the dependencies
+2. Install `pnpm` using `corepack install`
+3. Run `pnpm i` to install the dependencies
 
 You can now work on `ancesdir`. We prefer [🔗Visual Studio Code](https://code.visualstudio.com/) as our development environment (it's cross-platform and awesome), but please use what you feel comfortable with (we'll even forgive you for using vim).
 
@@ -43,17 +43,17 @@ We love code reviews. If there are open pull requests, please feel free to revie
 
 To ensure code quality, we use prettier, static typing, eslint, and jest. These are all executed when you submit a pull request to ensure the contribution meets our code quality standard.
 
-To execute these operations outside of a pull request or commit operation, you can use `yarn`.
+To execute these operations outside of a pull request or commit operation, you can use `pnpm`.
 
-- `yarn typecheck`
-- `yarn lint` or `yarn lint --fix` to autofix what can be
-- `yarn test`
+- `pnpm typecheck`
+- `pnpm lint` or `pnpm lint --fix` to autofix what can be
+- `pnpm test`
 
 💭**REMEMBER** If you would like to contribute code changes to the project, first make sure there's a corresponding issue for the change you wish to make.
 
 ## 📦 Build And Publish
 
-Anyone can create a local build of the distributed code by running `yarn build`.
+Anyone can create a local build of the distributed code by running `pnpm build`.
 
 Running the build will execute tests first.
 
