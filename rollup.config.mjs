@@ -1,10 +1,12 @@
+import {defineConfig} from "rollup";
 import resolve from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import terser from "@rollup/plugin-terser";
 import filesize from "rollup-plugin-filesize";
+import {codecovRollupPlugin} from "@codecov/rollup-plugin";
 
-export default {
+export default defineConfig({
     input: "./src/index.ts",
     output: [
         {
@@ -30,6 +32,16 @@ export default {
         resolve({preferBuiltins: true, extensions: [".ts"]}),
         commonjs(),
         terser(),
-        filesize(),
+        process.env.CODECOV_TOKEN == null
+            ? // This plugin outputs size info to the console when local.
+              filesize()
+            : // This plugin provides bundle analysis from codecov, but does
+              // not work locally without additional config, and it does not
+              // output size info to the console.
+              codecovRollupPlugin({
+                  enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+                  bundleName: "ancesdir",
+                  uploadToken: process.env.CODECOV_TOKEN,
+              }),
     ],
-};
+});
