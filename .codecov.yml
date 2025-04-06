@@ -5,15 +5,15 @@ coverage:
 
   status:
     project:
-      default: on
+      default: true
     patch:
-      default: off
+      default: false
     changes:
-      default: off
+      default: false
 
 comment:
   layout: "header, reach, diff, flags, files, footer"
   behavior: default
-  require_changes: no
-  require_base: no
-  require_head: yes
+  require_changes: false
+  require_base: false
+  require_head: true
