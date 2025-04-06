@@ -35,8 +35,9 @@ export default defineConfig({
         process.env.CODECOV_TOKEN == null
             ? // This plugin outputs size info to the console when local.
               filesize()
-            : // This plugin provides bundle analysis from codecov, but does not work
-              // locally without the appropriate token (and possible other config).
+            : // This plugin provides bundle analysis from codecov, but does
+              // not work locally without additional config, and it does not
+              // output size info to the console.
               codecovRollupPlugin({
                   enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
                   bundleName: "ancesdir",
