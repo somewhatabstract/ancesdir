@@ -18,6 +18,7 @@ export const normalizeOptions = (
 ): Options => {
     if (typeof fromOrOptions === "string") {
         return {
+            force: false,
             from: fromOrOptions,
             includeFrom: false,
             marker: marker ?? defaultMarker,
@@ -26,6 +27,7 @@ export const normalizeOptions = (
 
     if (typeof fromOrOptions === "object" && fromOrOptions !== null) {
         return {
+            force: fromOrOptions.force ?? false,
             from: fromOrOptions.from ?? defaultFrom(),
             marker: fromOrOptions.marker ?? defaultMarker,
             includeFrom: fromOrOptions.includeFrom ?? false,
@@ -33,6 +35,7 @@ export const normalizeOptions = (
     }
 
     return {
+        force: false,
         from: defaultFrom(),
         marker: defaultMarker,
         includeFrom: false,

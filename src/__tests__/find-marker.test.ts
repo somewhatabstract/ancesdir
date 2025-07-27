@@ -22,7 +22,12 @@ describe("findMarker", () => {
 
         // Act
         const underTest = () =>
-            findMarker({from: "./path", marker: "marker", includeFrom: false});
+            findMarker({
+                force: false,
+                from: "./path",
+                marker: "marker",
+                includeFrom: false,
+            });
 
         // Assert
         expect(underTest).toThrowErrorMatchingInlineSnapshot(
@@ -30,50 +35,74 @@ describe("findMarker", () => {
         );
     });
 
-    it("should lookup request in cache", () => {
-        // Arrange
-        jest.spyOn(path, "isAbsolute").mockReturnValue(true);
-        jest.spyOn(cache, "getKey").mockReturnValue("CACHE RESULT!");
+    describe("force is false", () => {
+        it("should lookup request in cache", () => {
+            // Arrange
+            jest.spyOn(path, "isAbsolute").mockReturnValue(true);
+            jest.spyOn(cache, "getKey").mockReturnValue("CACHE RESULT!");
 
-        // Act
-        const result = findMarker({
-            from: "/Absolute/Path",
-            marker: "marker",
-            includeFrom: false,
+            // Act
+            const result = findMarker({
+                force: false,
+                from: "/Absolute/Path",
+                marker: "marker",
+                includeFrom: false,
+            });
+
+            // Assert
+            expect(result).toBe("CACHE RESULT!");
         });
 
-        // Assert
-        expect(result).toBe("CACHE RESULT!");
+        it("should throw if we cached that marker was not found", () => {
+            // Arrange
+            jest.spyOn(path, "isAbsolute").mockReturnValue(true);
+            jest.spyOn(cache, "getKey").mockReturnValue(null);
+
+            // Act
+            const underTest = () =>
+                findMarker({
+                    force: false,
+                    from: "/Absolute/Path",
+                    marker: "markerwewontfind",
+                    includeFrom: false,
+                });
+
+            // Assert
+            expect(underTest).toThrowErrorMatchingInlineSnapshot(
+                `"Could not find marker, "markerwewontfind", from given starting location "/Absolute/Path""`,
+            );
+        });
+    });
+
+    describe("force is true", () => {
+        it("should not lookup request in cache", () => {
+            // Arrange
+            jest.spyOn(path, "isAbsolute").mockReturnValue(true);
+            jest.spyOn(cache, "getKey").mockReturnValue("CACHE RESULT!");
+
+            // Act
+            const underTest = () =>
+                findMarker({
+                    force: true,
+                    from: "/Absolute/Path",
+                    marker: "marker",
+                    includeFrom: false,
+                });
+
+            // Assert
+            expect(underTest).toThrow();
+        });
     });
 
     it("should throw if marker never found", () => {
         // Arrange
         jest.spyOn(path, "isAbsolute").mockReturnValue(true);
-        jest.spyOn(cache, "getKey").mockReturnValue(null);
         jest.spyOn(path, "dirname").mockImplementationOnce((f: any) => f);
 
         // Act
         const underTest = () =>
             findMarker({
-                from: "/Absolute/Path",
-                marker: "markerwewontfind",
-                includeFrom: false,
-            });
-
-        // Assert
-        expect(underTest).toThrowErrorMatchingInlineSnapshot(
-            `"Could not find marker, "markerwewontfind", from given starting location "/Absolute/Path""`,
-        );
-    });
-
-    it("should throw if we cached that marker was not found", () => {
-        // Arrange
-        jest.spyOn(path, "isAbsolute").mockReturnValue(true);
-        jest.spyOn(cache, "getKey").mockReturnValue(null);
-
-        // Act
-        const underTest = () =>
-            findMarker({
+                force: false,
                 from: "/Absolute/Path",
                 marker: "markerwewontfind",
                 includeFrom: false,
@@ -93,6 +122,7 @@ describe("findMarker", () => {
         // Act
         const underTest = () =>
             findMarker({
+                force: false,
                 from: "/Absolute/Path",
                 marker: "markerwewontfind",
                 includeFrom: false,
@@ -128,6 +158,7 @@ describe("findMarker", () => {
 
         // Act
         const result = findMarker({
+            force: false,
             from: path.join("Absolute", "Path", "Here"),
             marker: "package.json",
             includeFrom: false,
@@ -156,6 +187,7 @@ describe("findMarker", () => {
 
         // Act
         findMarker({
+            force: false,
             from: path.join("Absolute", "Path", "Here"),
             marker: "package.json",
             includeFrom: false,
@@ -177,11 +209,11 @@ describe("findMarker", () => {
             // Arrange
             jest.spyOn(path, "isAbsolute").mockReturnValue(true);
             jest.spyOn(fs, "existsSync").mockReturnValue(true);
-            jest.spyOn(cache, "getKey").mockReturnValue(undefined);
             jest.spyOn(cache, "setKeys").mockImplementation(() => {});
 
             // Act
             const result = findMarker({
+                force: false,
                 from: "/Absolute/Path",
                 marker: "marker",
                 includeFrom: true,
@@ -191,7 +223,7 @@ describe("findMarker", () => {
             expect(result).toBe("/Absolute/Path");
         });
 
-        it("should return cache for includeFrom key", () => {
+        it("should return cache for includeFrom key when force is false", () => {
             // Arrange
             jest.spyOn(path, "isAbsolute").mockReturnValue(true);
             jest.spyOn(fs, "existsSync").mockReturnValue(true);
@@ -204,6 +236,7 @@ describe("findMarker", () => {
 
             // Act
             const result = findMarker({
+                force: false,
                 from: "/Absolute/Path",
                 marker: "marker",
                 includeFrom: true,
@@ -212,6 +245,31 @@ describe("findMarker", () => {
             // Assert
             expect(result).toBe("/Absolute/Path");
         });
+
+        it("should not check cache for includeFrom key when force is true", () => {
+            // Arrange
+            jest.spyOn(path, "isAbsolute").mockReturnValue(true);
+            jest.spyOn(fs, "existsSync").mockReturnValue(true);
+            const getKeySpy = jest.spyOn(cache, "getKey");
+            jest.spyOn(cache, "setKeys").mockImplementation(() => {});
+
+            // Act
+            try {
+                findMarker({
+                    force: true,
+                    from: "/Absolute/Path",
+                    marker: "marker",
+                    includeFrom: true,
+                });
+            } catch {
+                /* ignore */
+            }
+
+            // Assert
+            expect(getKeySpy).not.toHaveBeenCalledWith(
+                "includeFrom:/Absolute/Path:marker",
+            );
+        });
     });
 
     describe("includeFrom is false", () => {
@@ -219,12 +277,12 @@ describe("findMarker", () => {
             // Arrange
             jest.spyOn(path, "isAbsolute").mockReturnValue(true);
             jest.spyOn(fs, "existsSync").mockReturnValue(true);
-            jest.spyOn(cache, "getKey").mockReturnValue(undefined);
             jest.spyOn(cache, "setKeys").mockImplementation(() => {});
 
             // Act
             const underTest = () =>
                 findMarker({
+                    force: false,
                     from: "/Absolute/Path",
                     marker: "marker",
                     includeFrom: false,
@@ -244,6 +302,7 @@ describe("findMarker", () => {
             // Act
             try {
                 findMarker({
+                    force: false,
                     from: "/Absolute/Path",
                     marker: "marker",
                     includeFrom: false,
