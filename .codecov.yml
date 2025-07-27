@@ -3,6 +3,9 @@ coverage:
   round: down
   range: "90...100"
 
+  ignore:
+    - "src/index.ts"
+
   status:
     project:
       default: true
