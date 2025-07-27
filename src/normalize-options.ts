@@ -24,7 +24,7 @@ export const normalizeOptions = (
         };
     }
 
-    if (typeof fromOrOptions === "object") {
+    if (typeof fromOrOptions === "object" && fromOrOptions !== null) {
         return {
             from: fromOrOptions.from ?? defaultFrom(),
             marker: fromOrOptions.marker ?? defaultMarker,
