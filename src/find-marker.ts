@@ -36,8 +36,12 @@ export const findMarker = ({
         return undefined;
     };
 
-    const makeKey = (from: string, includeFrom: boolean): string =>
-        includeFrom ? `includeFrom:${from}:${marker}` : `${from}:${marker}`;
+    const makeKey = (from: string, includeFrom: boolean): string => {
+        const normalizedFrom = from.replaceAll(path.sep, "/");
+        return includeFrom
+            ? `includeFrom:${normalizedFrom}:${marker}`
+            : `${normalizedFrom}:${marker}`;
+    };
 
     if (includeFrom) {
         // Before we roll our loop, let's check the cache for our starting
