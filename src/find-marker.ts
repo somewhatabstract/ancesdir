@@ -37,7 +37,7 @@ export const findMarker = ({
     };
 
     const makeKey = (from: string, includeFrom: boolean): string => {
-        const normalizedFrom = from.replaceAll(path.sep, "/");
+        const normalizedFrom = from.split(path.sep).join("/");
         return includeFrom
             ? `includeFrom:${normalizedFrom}:${marker}`
             : `${normalizedFrom}:${marker}`;
@@ -61,7 +61,7 @@ export const findMarker = ({
         }
     }
 
-    const keys = new Set<string>();
+    const keys: Array<string> = [];
 
     /* Rather than recurse, we keep the stack light and iterate.
 
@@ -76,7 +76,7 @@ export const findMarker = ({
         // We use a cache so that subsequent calls can use the cached result
         // rather than having to search the file system again.
         const key = makeKey(from, false);
-        keys.add(key);
+        keys.push(key);
 
         /* If we have already looked this up, we can just grab it from our map!
 
@@ -113,7 +113,7 @@ export const findMarker = ({
             // We cache this location's result for all the keys we've tried.
             // We can also cache this as the includeFrom result for this
             // location.
-            keys.add(makeKey(dirToCheck, true));
+            keys.push(makeKey(dirToCheck, true));
             setKeys(keys, dirToCheck);
             result = dirToCheck;
         } else {

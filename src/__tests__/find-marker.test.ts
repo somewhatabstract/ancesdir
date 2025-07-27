@@ -163,11 +163,11 @@ describe("findMarker", () => {
 
         // Assert
         expect(setKeysSpy).toHaveBeenCalledWith(
-            new Set([
+            [
                 "Absolute/Path/Here:package.json",
                 "Absolute/Path:package.json",
                 "includeFrom:Absolute:package.json",
-            ]),
+            ],
             "Absolute",
         );
     });
