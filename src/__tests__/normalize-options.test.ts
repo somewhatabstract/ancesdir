@@ -70,9 +70,28 @@ describe("normalizeOptions", () => {
         },
     );
 
+    it.each`
+        args
+        ${["/ancesdir/root"]}
+        ${[
+    {
+        from: "/ancesdir/root",
+    },
+]}
+    `("should default force to false when called with $args", ({args}) => {
+        // Arrange
+
+        // Act
+        const options = normalizeOptions(...args);
+
+        // Assert
+        expect(options.force).toBe(false);
+    });
+
     it("should not modify options that are passed in", () => {
         // Arrange
         const options = {
+            force: true,
             from: "/ancesdir/root",
             marker: "custom-marker",
             includeFrom: true,

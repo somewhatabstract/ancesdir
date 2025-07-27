@@ -20,12 +20,19 @@ export const findMarker = ({
     from: startingPoint,
     marker,
     includeFrom,
+    force,
 }: Options): string => {
     if (!path.isAbsolute(startingPoint)) {
         throwStartingPathNotAbsoluteMessage(startingPoint);
     }
 
     const getFromCacheOrThrow = (key: string): string | undefined => {
+        if (force) {
+            // If we're forcing a search, we don't want to use the cache
+            // to look up values.
+            return undefined;
+        }
+
         const cachedValue = getKey(key);
         if (cachedValue != null) {
             return cachedValue;

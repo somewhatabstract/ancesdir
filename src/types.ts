@@ -3,17 +3,20 @@
  */
 export interface Options {
     /**
+     * Whether to force a full search, or to use the cache.
+     * If true, the search will ignore any cached results and search the
+     * file system for the marker, updating the cache with the results.
+     * Otherwise, it will use the cached results when available.
+     * Defaults to false.
+     */
+    force: boolean;
+
+    /**
      * The absolute path to start the search from.
      * If not provided, defaults to the package directory of the ancesdir
      * module.
      */
     from: string;
-
-    /**
-     * The marker to look for in the directory structure.
-     * Defaults to "package.json".
-     */
-    marker: string;
 
     /**
      * Whether or not to include the starting location in the search.
@@ -23,6 +26,12 @@ export interface Options {
      * Defaults to false.
      */
     includeFrom: boolean;
+
+    /**
+     * The marker to look for in the directory structure.
+     * Defaults to "package.json".
+     */
+    marker: string;
 }
 
 export interface AncesdirFn {

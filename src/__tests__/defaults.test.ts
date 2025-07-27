@@ -14,6 +14,7 @@ describe("defaultFrom", () => {
 
         // Assert
         expect(findMarkerSpy).toHaveBeenCalledWith({
+            force: false,
             from: path.dirname(__dirname),
             marker: "package.json",
             includeFrom: false,
