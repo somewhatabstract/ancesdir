@@ -9,7 +9,12 @@ import {findMarker} from "./find-marker";
  * @return {string} The absolute path to the default starting directory.
  */
 export const defaultFrom = (): string =>
-    findMarker({from: __dirname, marker: defaultMarker, includeFrom: false});
+    findMarker({
+        force: false,
+        from: __dirname,
+        marker: defaultMarker,
+        includeFrom: false,
+    });
 
 /**
  * The default marker file to look for in the directory structure.
