@@ -59,7 +59,7 @@ describe("clearCache", () => {
 
         // Act
         cache.clearCache();
-        const result = keys.map((k) => cache.getKey("key1"));
+        const result = keys.map((k) => cache.getKey(k));
 
         // Assert
         expect(result).toEqual([undefined, undefined]);
