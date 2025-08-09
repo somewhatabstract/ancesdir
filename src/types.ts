@@ -77,7 +77,7 @@ export interface ClosesdirFn {
      * parent directories, @see {@link ancesdir}.
      *
      * @param from - The absolute starting directory path. If not provided,
-     * defaults to the package directory of ancesdir.
+     * defaults to the parent directory of the `ancesdir` package directory.
      * @param marker - The marker file name to search for. Defaults to
      * "package.json".
      * @returns The absolute path to the directory containing the marker file.
@@ -89,10 +89,10 @@ export interface ClosesdirFn {
     /**
      * Finds the closest directory containing a specific marker file.
      *
-     * Defaults to starting the search in ancesdir's package directory.
-     * The default marker is "package.json". The starting `from`
-     * location is included in the search; see {@link ancesdir} if you do not
-     * want this behavior.
+     * Defaults to starting the search in the parent directory of the `ancesdir`
+     * package directory. The default marker is "package.json". The starting
+     * `from` location is included in the search; see {@link ancesdir} if you do
+     * not want this behavior.
      *
      * @param options - An object containing options for the search.
      * @returns The absolute path to the directory containing the marker file.
