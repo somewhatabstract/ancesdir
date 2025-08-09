@@ -1,5 +1,12 @@
 # ancesdir
 
+## 7.1.1
+
+### Patch Changes
+
+- a6e3c92: Update dev dependencies
+- 39be91e: Update README
+
 ## 7.1.0
 
 ### Minor Changes
