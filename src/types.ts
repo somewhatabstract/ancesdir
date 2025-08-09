@@ -38,8 +38,12 @@ export interface AncesdirFn {
     /**
      * Finds the ancestral directory containing a specific marker file.
      *
+     * The starting `from` location is not included in the search.
+     * @see {@link closesdir} for a version that includes the starting
+     * location in the search.
+     *
      * @param from - The absolute starting directory path. If not provided,
-     * defaults to the package directory of the current module.
+     * defaults to the package directory of ancesdir.
      * @param marker - The marker file name to search for. Defaults to
      * "package.json".
      * @returns The absolute path to the directory containing the marker file.
@@ -50,6 +54,11 @@ export interface AncesdirFn {
 
     /**
      * Finds the ancestral directory containing a specific marker file.
+     *
+     * Defaults to starting the search in ancesdir's package directory.
+     * The default marker is "package.json". By default, the starting `from`
+     * location is not included in the search; use the `includeFrom` option to
+     * override this behavior, or use {@link closesdir}.
      *
      * @param options - An object containing options for the search.
      * @returns The absolute path to the directory containing the marker file.
