@@ -21,3 +21,15 @@ export const setKeys = (keys: Iterable<string>, value: string | null): void => {
  */
 export const getKey = (key: string): string | null | undefined =>
     cache.get(key);
+
+/**
+ * Clear the entire cache.
+ *
+ * This will remove all entries from the cache, forcing any new lookups
+ * to fetch fresh data. Consider using the `force` option for `ancesdir` or
+ * `closesdir` to force fresh lookups on a case-by-case basis if you want
+ * to avoid invalidating the entire cache.
+ */
+export const clearCache = (): void => {
+    cache.clear();
+};
