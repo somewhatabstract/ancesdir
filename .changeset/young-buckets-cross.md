@@ -2,4 +2,4 @@
 "ancesdir": minor
 ---
 
-NEW `clearCache` function - clears the entire cache
+NEW: Added `clearCache` function - clears the entire cache

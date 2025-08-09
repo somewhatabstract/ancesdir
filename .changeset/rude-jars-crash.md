@@ -2,4 +2,4 @@
 "ancesdir": minor
 ---
 
-Add new `force` option to skip cache lookups
+NEW: Added `force` option to skip cache lookup for a call
