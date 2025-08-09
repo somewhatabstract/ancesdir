@@ -1,5 +1,14 @@
 # ancesdir
 
+## 7.1.0
+
+### Minor Changes
+
+- 6270ce1: NEW: Added options-based call signature
+- 2a4790a: NEW: Added `force` option to skip cache lookup for a call
+- 54c633f: NEW: Added `closesdir` function - this is the same as `ancesdir` except that it will start the search at the beginning location rather than its parent
+- 432fedc: NEW: Added `clearCache` function - clears the entire cache
+
 ## 7.0.0
 
 ### Major Changes
@@ -15,11 +24,9 @@
 ### Major Changes
 
 - fcc3a96: BREAKING CHANGE:
-
     - Drop support for Node 16 and Node 18. Node 20 is now the minimum required version.
 
     HOUSEKEEPING:
-
     - Updated various development dependencies like eslint, prettier, typescript, babel, etc.
 
 ## 5.0.1
