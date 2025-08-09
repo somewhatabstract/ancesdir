@@ -50,3 +50,18 @@ describe("setKeys", () => {
         });
     });
 });
+
+describe("clearCache", () => {
+    it("should clear all entries in the cache", () => {
+        // Arrange
+        const keys = ["key1", "key2"];
+        cache.setKeys(keys, "testValue");
+
+        // Act
+        cache.clearCache();
+        const result = keys.map((k) => cache.getKey(k));
+
+        // Assert
+        expect(result).toEqual([undefined, undefined]);
+    });
+});
