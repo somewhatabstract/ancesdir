@@ -56,7 +56,7 @@ export interface AncesdirFn {
      * Finds the ancestral directory containing a specific marker file.
      *
      * Defaults to starting the search in ancesdir's package directory.
-     * The default marker is "package.json". Rhe starting `from`
+     * The default marker is "package.json". The starting `from`
      * location is not included in the search; see {@link closesdir} if you
      * want this behavior.
      *
@@ -91,7 +91,7 @@ export interface ClosesdirFn {
      *
      * Defaults to starting the search in ancesdir's package directory.
      * The default marker is "package.json". The starting `from`
-     * location is included in the search; see {@link ancesdir} if you do no
+     * location is included in the search; see {@link ancesdir} if you do not
      * want this behavior.
      *
      * @param options - An object containing options for the search.
