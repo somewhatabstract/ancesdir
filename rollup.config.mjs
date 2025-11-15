@@ -14,12 +14,16 @@ export default defineConfig({
             format: "cjs",
             sourcemap: true,
             exports: "auto",
+            // Handle ESM default imports from external CommonJS modules with __esModule
+            interop: "auto",
         },
         {
             file: "./dist/es/index.js",
             format: "esm",
             sourcemap: true,
             exports: "auto",
+            // Handle ESM default imports from external CommonJS modules with __esModule
+            interop: "auto",
         },
     ],
     plugins: [
