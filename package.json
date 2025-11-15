@@ -12,6 +12,10 @@
     "author": "Jeff Yates <jeff@somewhatabstract.com>",
     "license": "MIT",
     "private": false,
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
     "engines": {
         "node": ">=20",
         "npm": "please-use-pnpm",
