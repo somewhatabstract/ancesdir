@@ -5,7 +5,10 @@
     "types": "dist/index.d.ts",
     "main": "dist/index.js",
     "module": "dist/es/index.js",
-    "repository": "https://github.com/somewhatabstract/ancesdir.git",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/somewhatabstract/ancesdir.git"
+    },
     "bugs": {
         "url": "https://github.com/somewhatabstract/ancesdir/issues"
     },
