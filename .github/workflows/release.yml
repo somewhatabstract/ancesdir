@@ -31,7 +31,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # For provenance
+      id-token: write # For provenance and trusted publishing
       contents: write # For creating release PRs
     steps:
       - uses: actions/checkout@v5
