@@ -73,7 +73,7 @@ jobs:
 
           # If the lowest version is the same as the required version, then we
           # don't need to upgrade as our current version must be newer.
-          if [ "$LOWEST_NPM_VERSION" == "$REQUIRED_NPM_VERSION" ]; then
+          if [ "$LOWEST_NPM_VERSION" = "$REQUIRED_NPM_VERSION" ]; then
             echo "✅ npm is already at version $CURRENT_NPM_VERSION"
           else
             npm install -g npm@latest && echo "✅ npm upgraded to $(npm --version)"
