@@ -56,6 +56,13 @@ jobs:
         shell: bash
         run: pnpm install --frozen-lockfile
 
+      - name: ⬆️ Upgrade npm for OIDC support
+        shell: bash
+        run: |
+          # npm trusted publishing requires npm CLI v11.5.1+
+          # Node.js 22 ships with npm 10.x, so we need to upgrade
+          npm install -g npm@latest && echo "✅ npm upgraded to $(npm --version)"
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
@@ -67,7 +74,5 @@ jobs:
           # the account of someone with appropriate access levels and given the
           # repo scope.
           GITHUB_TOKEN: ${{ secrets.BOT_PA_TOKEN }}
-          # This is used for the publish step to allow access to NPM.
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           # This is used for the bundle analysis
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
