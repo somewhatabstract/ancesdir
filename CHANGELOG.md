@@ -1,5 +1,15 @@
 # ancesdir
 
+## 7.2.0
+
+### Minor Changes
+
+- 2bef953: Deprecate default export and add named export for `ancesdir`
+
+### Patch Changes
+
+- 2bef953: Adding provenance
+
 ## 7.1.1
 
 ### Patch Changes
