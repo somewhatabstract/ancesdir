@@ -72,7 +72,7 @@ jobs:
           LOWEST_NPM_VERSION=$(printf '%s\n' "$REQUIRED_NPM_VERSION" "$CURRENT_NPM_VERSION" | sort -V | head -n1)
 
           # If the lowest version is the same as the required version, then we
-          # don't need to upgrade as our current version must be newer.
+          # don't need to upgrade as that means our current version is newer.
           if [ "$LOWEST_NPM_VERSION" = "$REQUIRED_NPM_VERSION" ]; then
             echo "✅ npm is already at version $CURRENT_NPM_VERSION"
           else
