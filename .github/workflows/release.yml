@@ -60,8 +60,18 @@ jobs:
         shell: bash
         run: |
           # npm trusted publishing requires npm CLI v11.5.1+
-          # Node.js 22 ships with npm 10.x, so we need to upgrade
-          npm install -g npm@latest && echo "✅ npm upgraded to $(npm --version)"
+          # Node.js 20 shipped with npm 9.x, so we likely need to upgrade
+
+          # First, let's check the current npm version, and if it's already
+          # sufficient, we can skip the upgrade step.
+          CURRENT_NPM_VERSION=$(npm --version)
+          REQUIRED_NPM_VERSION="11.5.1"
+
+          if [[ "$CURRENT_NPM_VERSION" < "$REQUIRED_NPM_VERSION" ]]; then
+            npm install -g npm@latest && echo "✅ npm upgraded to $(npm --version)"
+          else
+            echo "✅ npm is already at version $CURRENT_NPM_VERSION"
+          fi
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
