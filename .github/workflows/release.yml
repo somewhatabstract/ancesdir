@@ -31,7 +31,8 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # For trusted publishing to npm (includes provenance)
+      id-token: write # For provenance
+      contents: write # For creating release PRs
     steps:
       - uses: actions/checkout@v5
         with:
