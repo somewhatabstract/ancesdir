@@ -26,13 +26,13 @@ This may be useful in a variety of situations. For example, a monorepo where you
 
 ### `ancesdir`
 
-This method (the default export from the package) finds the first ancestor directory that contains a file or directory called `package.json` by default, or a custom marker file or directory if specified. The search starts with the
+This method finds the first ancestor directory that contains a file or directory called `package.json` by default, or a custom marker file or directory if specified. The search starts with the
 parent of the given location.
 
 #### Default
 
 ```typescript
-import ancesdir from "ancesdir";
+import {ancesdir} from "ancesdir";
 
 console.log(ancesdir());
 ```
@@ -44,7 +44,7 @@ In most cases, this is likely all you need.
 #### From Specific Location
 
 ```typescript
-import ancesdir from "ancesdir";
+import {ancesdir} from "ancesdir";
 
 console.log(ancesdir(__dirname));
 ```
@@ -54,7 +54,7 @@ Outputs the absolute path of the first parent directory to `__dirname` that cont
 #### Custom Target From Specific Location
 
 ```typescript
-import ancesdir from "ancesdir";
+import {ancesdir} from "ancesdir";
 
 console.log(ancesdir(__dirname, ".mymarkerfile");
 ```
