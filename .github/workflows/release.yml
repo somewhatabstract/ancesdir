@@ -35,7 +35,7 @@ jobs:
       contents: write # For creating release PRs
       pull-requests: write # For creating release PRs
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
