@@ -46,7 +46,7 @@
         "@babel/preset-typescript": "^7.28.5",
         "@changesets/cli": "^2.28.1",
         "@codecov/rollup-plugin": "^1.9.1",
-        "@eslint/compat": "^1.2.8",
+        "@eslint/compat": "^2.0.0",
         "@eslint/eslintrc": "^3.3.1",
         "@eslint/js": "^9.24.0",
         "@khanacademy/eslint-config": "^5.2.1",
