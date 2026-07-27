@@ -32,10 +32,10 @@ describe("normalizeOptions", () => {
         args
         ${["/ancesdir/root"]}
         ${[
-    {
-        from: "/ancesdir/root",
-    },
-]}
+            {
+                from: "/ancesdir/root",
+            },
+        ]}
     `(
         "should default marker to the defaultMarker result when called with $args",
         ({args}) => {
@@ -53,10 +53,10 @@ describe("normalizeOptions", () => {
         args
         ${["/ancesdir/root"]}
         ${[
-    {
-        from: "/ancesdir/root",
-    },
-]}
+            {
+                from: "/ancesdir/root",
+            },
+        ]}
     `(
         "should default includeFrom to false when called with $args",
         ({args}) => {
@@ -74,10 +74,10 @@ describe("normalizeOptions", () => {
         args
         ${["/ancesdir/root"]}
         ${[
-    {
-        from: "/ancesdir/root",
-    },
-]}
+            {
+                from: "/ancesdir/root",
+            },
+        ]}
     `("should default force to false when called with $args", ({args}) => {
         // Arrange
 
