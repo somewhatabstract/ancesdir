@@ -26,22 +26,10 @@ export const findMarker = ({
         throwStartingPathNotAbsoluteMessage(startingPoint);
     }
 
-    const getFromCacheOrThrow = (key: string): string | undefined => {
-        if (force) {
-            // If we're forcing a search, we don't want to use the cache
-            // to look up values.
-            return undefined;
-        }
-
-        const cachedValue = getKey(key);
-        if (cachedValue != null) {
-            return cachedValue;
-        }
-        if (cachedValue === null) {
-            throwMarkerNotFoundMessage(startingPoint, marker);
-        }
-        return undefined;
-    };
+    const getFromCache = (key: string): string | null | undefined =>
+        // If we're forcing a search, we don't want to use the cache to look
+        // up values.
+        force ? undefined : getKey(key);
 
     const makeKey = (from: string, includeFrom: boolean): string => {
         const normalizedFrom = from.split(path.sep).join("/");
@@ -50,83 +38,82 @@ export const findMarker = ({
             : `${normalizedFrom}:${marker}`;
     };
 
+    /* Every key we visit shares the final result, so we collect them and
+       cache them all together once we know it, whether we got it from the
+       disk or the cache, and whether or not the marker was found. */
+    const keys: Array<string> = [];
+
+    const settle = (result: string | null): string => {
+        setKeys(keys, result);
+        return result ?? throwMarkerNotFoundMessage(startingPoint, marker);
+    };
+
     if (includeFrom) {
         // Before we roll our loop, let's check the cache for our starting
         // point under the includeFrom condition.
         const includeFromKey = makeKey(startingPoint, true);
-        const cachedResult = getFromCacheOrThrow(includeFromKey);
-        if (cachedResult != null) {
-            // We found a cached result, so we can return it.
-            return cachedResult;
+        keys.push(includeFromKey);
+        const cachedResult = getFromCache(includeFromKey);
+        if (cachedResult !== undefined) {
+            return settle(cachedResult);
         }
 
         // Let's check the disk.
         if (fs.existsSync(path.join(startingPoint, marker))) {
             // We found the marker at the starting point.
-            setKeys([includeFromKey], startingPoint);
-            return startingPoint;
+            return settle(startingPoint);
         }
-    }
 
-    const keys: Array<string> = [];
+        // It's not at the starting point, so the result is the same as the
+        // search that excludes the starting point.
+    }
 
     /* Rather than recurse, we keep the stack light and iterate.
 
-       Our exit conditions are:
-        - throw if we cached that the marker cannot be found
-        - throw if we cannot find the marker
-        - return cached result
-        - return marker directory */
-    let result = null;
+       NOTE: Because we cache our result, if the marker was created after
+       we cached the result, we will claim it cannot be found. Equally, if
+       the marker was deleted after we cached the result, we will claim it
+       was found.
+
+       The assumption is that a use of ancesdir is short-lived and such
+       scenarios aren't likely to occur. We could mitigate this by adding
+       the ability to clear the cache, or by making the cache invalidate
+       after a certain time period. Something to consider for a future
+       update, though no one has asked for it yet. */
     let from = startingPoint;
-    while (result == null) {
-        // We use a cache so that subsequent calls can use the cached result
-        // rather than having to search the file system again.
+    for (;;) {
+        // If we have already looked this up, we can just grab it from our
+        // map!
         const key = makeKey(from, false);
         keys.push(key);
-
-        /* If we have already looked this up, we can just grab it from our map!
-
-           NOTE: Because we cache our result, if the marker was created after
-           we cached the result, we will claim it cannot be found. Equally, if
-           the marker was deleted after we cached the result, we will claim it
-           was found.
-
-           The assumption is that a use of ancesdir is short-lived and such
-           scenarios aren't likely to occur. We could mitigate this by adding
-           the ability to clear the cache, or by making the cache invalidate
-           after a certain time period. Something to consider for a future
-           update, though no one has asked for it yet. */
-        const cachedResult = getFromCacheOrThrow(key);
-        if (cachedResult != null) {
-            result = cachedResult;
-            continue;
+        const cachedResult = getFromCache(key);
+        if (cachedResult !== undefined) {
+            return settle(cachedResult);
         }
 
-        // Our search location is the parent dir of the current from point,
-        // or the current point if includeFrom is true.
+        // Our search location is the parent dir of the current from point.
         const dirToCheck = path.dirname(from);
         if (dirToCheck === from || dirToCheck == null) {
             // We've hit the end of our search. There's no match.
-            // We'll have to give up, cache our failure and throw an error.
-            setKeys(keys, null);
-            throwMarkerNotFoundMessage(startingPoint, marker);
+            return settle(null);
+        }
+
+        // Searching above the current point is the same as searching from
+        // its parent with includeFrom, so that key shares our result too,
+        // and may already be cached.
+        const dirToCheckKey = makeKey(dirToCheck, true);
+        keys.push(dirToCheckKey);
+        const cachedDirResult = getFromCache(dirToCheckKey);
+        if (cachedDirResult !== undefined) {
+            return settle(cachedDirResult);
         }
 
         // Let's see if the marker file exists at this location.
-        const pathToCheck = path.join(dirToCheck, marker);
-        if (fs.existsSync(pathToCheck)) {
-            // The marker exists at this location.
-            // We cache this location's result for all the keys we've tried.
-            // We can also cache this as the includeFrom result for this
-            // location.
-            keys.push(makeKey(dirToCheck, true));
-            setKeys(keys, dirToCheck);
-            result = dirToCheck;
-        } else {
-            // We didn't find it. Let's update our from value and iterate.
-            from = dirToCheck;
+        if (fs.existsSync(path.join(dirToCheck, marker))) {
+            return settle(dirToCheck);
         }
+
+        // We didn't find it. Let's update our from value and iterate.
+        from = dirToCheck;
     }
-    return result;
 };
