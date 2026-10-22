@@ -1,5 +1,15 @@
 # ancesdir
 
+## 8.0.0
+
+### Major Changes
+
+- fa792ec: Require Node.js 24 or later. Node.js 20 and 22 are no longer supported.
+
+### Patch Changes
+
+- 1a84260: Cache every key visited during a search, including on cache hits and not-found results, and consult the parent directory's cached result before checking the disk
+
 ## 7.2.0
 
 ### Minor Changes
