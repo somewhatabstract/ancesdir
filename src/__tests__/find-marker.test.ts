@@ -16,6 +16,16 @@ describe("findMarker", () => {
         });
     });
 
+    const useRealPaths = () => {
+        jest.spyOn(path, "isAbsolute").mockReturnValue(true);
+        jest.spyOn(path, "dirname").mockImplementation(
+            jest.requireActual("path").dirname,
+        );
+        jest.spyOn(path, "join").mockImplementation(
+            jest.requireActual("path").join,
+        );
+    };
+
     it("should throw if from path is not absolute", () => {
         // Arrange
         jest.spyOn(path, "isAbsolute").mockReturnValue(false);
@@ -168,7 +178,7 @@ describe("findMarker", () => {
         expect(result).toBe("Absolute");
     });
 
-    it("should cache the location of the found marker for all checked keys and the includeFrom key", () => {
+    it("should cache the location of the found marker for all checked keys, including the includeFrom keys of the directories checked", () => {
         // Arrange
         jest.spyOn(path, "isAbsolute").mockReturnValue(true);
         jest.spyOn(path, "dirname").mockImplementation(
@@ -197,11 +207,116 @@ describe("findMarker", () => {
         expect(setKeysSpy).toHaveBeenCalledWith(
             [
                 "Absolute/Path/Here:package.json",
+                "includeFrom:Absolute/Path:package.json",
                 "Absolute/Path:package.json",
                 "includeFrom:Absolute:package.json",
             ],
             "Absolute",
         );
+    });
+
+    it("should cache a cached result for the keys checked before reaching it", () => {
+        // Arrange
+        useRealPaths();
+        jest.spyOn(fs, "existsSync").mockReturnValue(false);
+        jest.spyOn(cache, "getKey").mockImplementation((key) =>
+            key === "Absolute/Path:package.json" ? "/ROOT" : undefined,
+        );
+        const setKeysSpy = jest.spyOn(cache, "setKeys");
+
+        // Act
+        findMarker({
+            force: false,
+            from: path.join("Absolute", "Path", "Here"),
+            marker: "package.json",
+            includeFrom: false,
+        });
+
+        // Assert
+        expect(setKeysSpy).toHaveBeenCalledWith(
+            [
+                "Absolute/Path/Here:package.json",
+                "includeFrom:Absolute/Path:package.json",
+                "Absolute/Path:package.json",
+            ],
+            "/ROOT",
+        );
+    });
+
+    it("should cache a cached not-found result for the keys checked before reaching it", () => {
+        // Arrange
+        useRealPaths();
+        jest.spyOn(fs, "existsSync").mockReturnValue(false);
+        jest.spyOn(cache, "getKey").mockImplementation((key) =>
+            key === "Absolute/Path:package.json" ? null : undefined,
+        );
+        const setKeysSpy = jest.spyOn(cache, "setKeys");
+
+        // Act
+        try {
+            findMarker({
+                force: false,
+                from: path.join("Absolute", "Path", "Here"),
+                marker: "package.json",
+                includeFrom: false,
+            });
+        } catch {
+            /* ignore */
+        }
+
+        // Assert
+        expect(setKeysSpy).toHaveBeenCalledWith(
+            [
+                "Absolute/Path/Here:package.json",
+                "includeFrom:Absolute/Path:package.json",
+                "Absolute/Path:package.json",
+            ],
+            null,
+        );
+    });
+
+    it("should return the cached includeFrom result for the parent directory", () => {
+        // Arrange
+        useRealPaths();
+        jest.spyOn(fs, "existsSync").mockReturnValue(false);
+        jest.spyOn(cache, "getKey").mockImplementation((key) =>
+            key === "includeFrom:Absolute/Path:package.json"
+                ? "/ROOT"
+                : undefined,
+        );
+
+        // Act
+        const result = findMarker({
+            force: false,
+            from: path.join("Absolute", "Path", "Here"),
+            marker: "package.json",
+            includeFrom: false,
+        });
+
+        // Assert
+        expect(result).toBe("/ROOT");
+    });
+
+    it("should not check the disk when the parent directory's includeFrom result is cached", () => {
+        // Arrange
+        useRealPaths();
+        const existsSyncSpy = jest.spyOn(fs, "existsSync");
+        jest.spyOn(cache, "getKey").mockImplementation((key) =>
+            key === "includeFrom:Absolute/Path:package.json"
+                ? "/ROOT"
+                : undefined,
+        );
+
+        // Act
+        findMarker({
+            force: false,
+            from: path.join("Absolute", "Path", "Here"),
+            marker: "package.json",
+            includeFrom: false,
+        });
+
+        // Assert
+        expect(existsSyncSpy).not.toHaveBeenCalled();
     });
 
     describe("includeFrom is true", () => {
@@ -221,6 +336,58 @@ describe("findMarker", () => {
 
             // Assert
             expect(result).toBe("/Absolute/Path");
+        });
+
+        it("should cache the starting point's includeFrom key with a marker found above it", () => {
+            // Arrange
+            useRealPaths();
+            jest.spyOn(fs, "existsSync").mockImplementation(
+                (f: any) => f === path.join("Absolute", "package.json"),
+            );
+            const setKeysSpy = jest.spyOn(cache, "setKeys");
+
+            // Act
+            findMarker({
+                force: false,
+                from: path.join("Absolute", "Path"),
+                marker: "package.json",
+                includeFrom: true,
+            });
+
+            // Assert
+            expect(setKeysSpy).toHaveBeenCalledWith(
+                expect.arrayContaining([
+                    "includeFrom:Absolute/Path:package.json",
+                ]),
+                "Absolute",
+            );
+        });
+
+        it("should cache the starting point's includeFrom key when the marker is not found", () => {
+            // Arrange
+            useRealPaths();
+            jest.spyOn(fs, "existsSync").mockReturnValue(false);
+            const setKeysSpy = jest.spyOn(cache, "setKeys");
+
+            // Act
+            try {
+                findMarker({
+                    force: false,
+                    from: path.join("Absolute", "Path"),
+                    marker: "package.json",
+                    includeFrom: true,
+                });
+            } catch {
+                /* ignore */
+            }
+
+            // Assert
+            expect(setKeysSpy).toHaveBeenCalledWith(
+                expect.arrayContaining([
+                    "includeFrom:Absolute/Path:package.json",
+                ]),
+                null,
+            );
         });
 
         it("should return cache for includeFrom key when force is false", () => {
